@@ -1,0 +1,5 @@
+workon/bin/
+workon/obj/
+.vs/
+workon/workon.csproj.user
+workon/Properties/
