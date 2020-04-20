@@ -9,9 +9,20 @@ namespace workon
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            if (args == null || args.Length != 2)
+            {
+                Console.WriteLine("Usage: workon.exe <path-to-.aws> <profile>\n\teg. > workon.exe C:\\Users\\drewc\\.aws default");
+                return;
+            }
 
-            // TODO: > workon.exe default
+            var path = $"{args[0]}\\credentials";
+            if (!File.Exists(path))
+            {
+                Console.WriteLine($"Couldn't find credentials in path: {args[0]}");
+                return;
+            }
+
+            var section = $"[{args[1]}]";
 
             var envs = new Dictionary<string, string>();
             var envMap = new Dictionary<string, string>
@@ -21,12 +32,9 @@ namespace workon
                 ["aws_secret_access_key"] = "AWS_SECRET_ACCESS_KEY",
                 ["aws_session_token"] = "AWS_SESSION_TOKEN"
             };
-
-            var path = @"C:\Users\drewc\.aws\credentials";
+            
             var lines = File.ReadAllLines(path);
-            var section = "[default]";
             bool hasFoundSection = false;
-
             foreach (var line in lines)
             {
                 if (line.Trim() == section)
@@ -63,7 +71,6 @@ namespace workon
             }
 
             Console.WriteLine("Done.");
-            Console.Read();
         }
     }
 }
