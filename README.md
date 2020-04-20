@@ -5,4 +5,4 @@ Must be run from administrative command line.
 
 Example usage:
 
-workon.exe C:\Users\drewc\.aws default
+workon.exe C:\Users\drewc\\.aws default
